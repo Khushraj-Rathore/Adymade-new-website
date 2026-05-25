@@ -100,12 +100,9 @@ header{position:fixed;inset:0 0 auto 0;z-index:200;background:rgba(8,5,26,0.85);
 .wa-nav:hover svg{fill:white}
 .nav-cta{padding:10px 22px;background:var(--electric);color:white;border-radius:var(--radius-sm);font-size:14px;font-weight:600;transition:all 0.2s;border:none}
 .nav-cta:hover{background:var(--imperial);box-shadow:0 6px 20px -4px rgba(90,20,240,0.6)}
-/* Hide wa-nav and nav-cta on mobile — show only hamburger */
-@media(max-width:1023px){
-  .wa-nav{display:none!important}
-  .nav-cta{display:none!important}
-}
-/* mob-menu-btn styles handled below with !important overrides */
+.mob-menu-btn{display:flex;flex-direction:column;gap:5px;background:none;border:none;padding:8px}
+.mob-menu-btn span{width:22px;height:2px;background:var(--white);border-radius:2px}
+@media(min-width:1024px){.mob-menu-btn{display:none}}
 
 /* ===== HERO ===== */
 .hero{min-height:100vh;display:flex;align-items:center;padding:140px 0 80px;position:relative;overflow:hidden}
@@ -322,7 +319,25 @@ footer{background:var(--abyss);border-top:1px solid var(--slate);padding:80px 0 
    MOBILE NAV — COMPLETE REWRITE
    ══════════════════════════════════════════════ */
 
-/* Hamburger CSS handled below with !important block */
+/* Hamburger always visible on mobile */
+.mob-menu-btn{
+  display:flex;flex-direction:column;justify-content:center;gap:5px;
+  background:rgba(90,20,240,.15);border:1px solid rgba(167,139,250,.25);
+  border-radius:8px;padding:10px;width:42px;height:42px;cursor:pointer;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+  flex-shrink:0;transition:background .2s;
+}
+.mob-menu-btn:hover{background:rgba(90,20,240,.3)}
+.mob-menu-btn span{
+  display:block;width:20px;height:2px;background:var(--white);border-radius:2px;
+  transition:transform .25s ease,opacity .2s ease;transform-origin:center;
+}
+@media(min-width:1024px){.mob-menu-btn{display:none}}
+
+/* Animated X when open */
+.mob-menu-btn.is-open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.mob-menu-btn.is-open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.mob-menu-btn.is-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
 /* ── MOBILE DRAWER ── */
 .mob-nav-drawer{
@@ -530,7 +545,7 @@ button.mob-menu-btn.is-open span:nth-child(3) {
             </div>
           </div>
         </li>
-        <li><a href="/our-work.html">Our Work</a></li>
+        <li><a href="/case-studies.html">Our Work</a></li>
         <li><a href="/about.html">About</a></li>
         <li><a href="/blog.html">Blog</a></li>
         <li><a href="/contact.html">Contact</a></li>
@@ -594,10 +609,6 @@ button.mob-menu-btn.is-open span:nth-child(3) {
     <a href="/our-work.html" class="mob-nav-link">
       <span class="mob-link-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></span>
       Our Work
-    </a>
-    <a href="/case-studies.html" class="mob-nav-link">
-      <span class="mob-link-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span>
-      Case Studies
     </a>
     <a href="/about.html" class="mob-nav-link">
       <span class="mob-link-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span>
